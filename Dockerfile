@@ -1,0 +1,9 @@
+FROM amazoncorretto:17
+WORKDIR /bot
+EXPOSE 8080
+ARG TOKEN
+ARG VERSION
+ARG ID
+ENV ACCESS_TOKEN=$TOKEN API_VERSION=$VERSION GROUP_ID=$ID
+COPY ./build/libs/vkchatbot_api-0.0.1-SNAPSHOT.jar /bot
+ENTRYPOINT java -jar /bot/vkchatbot_api-0.0.1-SNAPSHOT.jar

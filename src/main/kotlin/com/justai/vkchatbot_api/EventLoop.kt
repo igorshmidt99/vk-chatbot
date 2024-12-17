@@ -46,7 +46,8 @@ class EventLoop(
     }
 
     private fun sendResponseMessage(updates: JsonArray) {
-        updates.map { it.jsonObject }
+        updates.asSequence()
+            .map { it.jsonObject }
             .filter { (it["type"] as JsonPrimitive).content == "message_new" }
             .map { message(it) }
             .map { reqFactory.sendMessage(it) }
